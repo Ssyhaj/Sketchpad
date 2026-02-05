@@ -1,0 +1,27 @@
+extends GutTest
+
+var canvas_scene: PackedScene = load("res://system/canvas/canvas.tscn")
+var canvas: Canvas
+var project: Project
+
+var width: int = 100
+var height: int = 200
+
+func before_each():
+	var rs = RenderingServer
+	canvas = canvas_scene.instantiate()
+	add_child(canvas)
+	add_child(rs)
+	project = Project.new()
+	project.new_project(width, height)
+	canvas.attach_project(project)
+
+# TODO - Create unit tests and investigate GUT and RenderingServer issues.
+# func test_bake():
+# 	var rect = ColorRect.new()
+# 	canvas.dynamic_node.add_child(rect)
+
+# 	canvas.bake_page()
+
+# 	assert_eq(canvas.dynamic_node.get_child_count(), 0, "Verify bake clearing dynamic")
+# 	assert_eq(canvas.bake_node.get_child_count(), 0, "Verify bake clearing viewport")

@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Sketchpad"
+run/main_scene="uid://bhgj2qy6e3eb5"
+config/features=PackedStringArray("4.6")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/use_filter=false
+boot_splash/image="uid://ftn5rtp15ap4"
+config/icon="uid://ftn5rtp15ap4"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://byt6lsmcohxy3"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.6786473, 0.67480093, 0.6643323, 1)

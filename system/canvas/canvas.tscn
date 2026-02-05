@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://ca1h0fih55p5l"]
+
+[ext_resource type="Script" uid="uid://dtbl5w1umd51p" path="res://system/canvas/canvas.gd" id="1_nl8v8"]
+[ext_resource type="Script" uid="uid://d0bwusolhvbae" path="res://system/canvas/canvas_camera.gd" id="2_2nd50"]
+
+[node name="Canvas" type="Node2D" unique_id=502353309]
+script = ExtResource("1_nl8v8")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=673575224]
+script = ExtResource("2_2nd50")
+
+[node name="Control" type="Control" parent="." unique_id=488182267]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layers" type="Node2D" parent="Control" unique_id=760557918]
+
+[node name="Dynamic" type="Node2D" parent="Control" unique_id=356778995]
+
+[node name="BakeViewport" type="SubViewport" parent="." unique_id=1325751403]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+
+[node name="Bake" type="Node2D" parent="BakeViewport" unique_id=200955020]

@@ -1,0 +1,75 @@
+class_name Canvas
+extends Node2D
+
+var _project: Project
+
+@onready var control_node: Control = $Control
+@onready var layers_node: Node2D = $Control/Layers
+@onready var dynamic_node: Node2D = $Control/Dynamic
+
+@onready var bake_viewport: Viewport = $BakeViewport
+@onready var bake_node: Node2D = $BakeViewport/Bake
+
+func attach_project(project: Project) -> void:
+	_project = project
+	_project.new_current_page.connect(render_page)
+
+## Refreshes canvas sprites to current page. [br]
+## [param page] - Page to render.
+func render_page(page: Page) -> void:
+	control_node.size = Vector2(_project.width, _project.height)
+	control_node.position = -(control_node.size / 2.0)
+
+	for node in layers_node.get_children():
+		layers_node.remove_child(node)
+		node.queue_free()
+
+	var textures = page.get_content()
+	for texture in textures:
+		var sprite = Sprite2D.new()
+		sprite.centered = false
+		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		layers_node.add_child(sprite)
+		if sprite is Sprite2D:
+			sprite.texture = texture
+
+## Bakes [code]dynamic_node[/code] contents to the current page.
+func bake_page() -> void:
+	# Getting items from our project.
+	var current_page = _project.frames[_project._current_frame]
+	var current_layer = _project._current_layer + 1
+
+	bake_viewport.size = Vector2(_project.width, _project.height)
+
+	# Preventing the odd flicker between render and baking.
+	for node in dynamic_node.get_children():
+		var new_node = node.duplicate()
+		bake_node.add_child(new_node)
+
+	# Taking the snapshot of our dynamic node.
+		bake_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+		await RenderingServer.frame_post_draw
+
+	# Baking ontop of the existing layer.
+	var texture_to_bake = bake_viewport.get_texture()
+	var image_to_bake = texture_to_bake.get_image()
+
+	var layer_image = current_page.layers[current_layer]
+	layer_image.blend_rect(
+		image_to_bake,
+		Rect2(Vector2.ZERO, image_to_bake.get_size()),
+		Vector2.ZERO
+	)
+
+	current_page.set_layer(current_layer, layer_image)
+
+	# Clearing dynamic and viewport now that it is baked.
+	for node in bake_node.get_children():
+		bake_node.remove_child(node)
+		node.queue_free()
+
+	for node in dynamic_node.get_children():
+		dynamic_node.remove_child(node)
+		node.queue_free()
+
+	_project.get_current_page()

@@ -33,3 +33,5 @@ transparent_bg = true
 canvas_item_default_texture_filter = 0
 
 [node name="Bake" type="Node2D" parent="BakeViewport" unique_id=200955020]
+
+[connection signal="gui_input" from="Control" to="." method="_on_gui_input"]

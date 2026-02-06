@@ -52,6 +52,33 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8jh7"]
 bg_color = Color(0.1497609, 0.28717783, 0.44712496, 0.39215687)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipy44"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbily"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0.49411765, 0.7411765, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_784td"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.5803922, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0fy6x"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.21176471, 0.3882353, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbw1g"]
+bg_color = Color(0.6784314, 0.6745098, 0.6627451, 1)
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/styles/disabled = SubResource("StyleBoxFlat_6j8ly")
@@ -61,3 +88,9 @@ Button/styles/normal = SubResource("StyleBoxFlat_31loe")
 Button/styles/pressed = SubResource("StyleBoxFlat_pchdo")
 ItemList/styles/panel = SubResource("StyleBoxFlat_xeq2n")
 Panel/styles/panel = SubResource("StyleBoxFlat_m8jh7")
+TabContainer/constants/side_margin = 0
+TabContainer/styles/panel = SubResource("StyleBoxFlat_ipy44")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_jbily")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_784td")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_0fy6x")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_cbw1g")

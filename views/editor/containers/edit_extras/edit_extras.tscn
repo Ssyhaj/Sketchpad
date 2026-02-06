@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://d1bvrkbad6iok"]
+
+[ext_resource type="Script" uid="uid://c5sn6aanfjycw" path="res://views/editor/containers/edit_extras/edit_extras.gd" id="1_0ld5u"]
+[ext_resource type="PackedScene" uid="uid://dbwrjejtlwgk6" path="res://views/editor/containers/timeline_manager/timeline_manager.tscn" id="1_svsaf"]
+[ext_resource type="PackedScene" uid="uid://42u35o2152du" path="res://views/editor/containers/project_manager/project_manager.tscn" id="1_xequw"]
+[ext_resource type="PackedScene" uid="uid://cloa3c54w8ah8" path="res://views/editor/containers/tool_manager/tool_manager.tscn" id="2_0ld5u"]
+[ext_resource type="PackedScene" uid="uid://egoa0insqasw" path="res://views/editor/containers/sound_manager/sound_manager.tscn" id="4_5xylh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ld5u"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="EditExtras" type="Control" unique_id=2042908143 node_paths=PackedStringArray("tab_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ld5u")
+tab_container = NodePath("Panel/VBoxContainer/TabContainer")
+
+[node name="Panel" type="Panel" parent="." unique_id=1692244936]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ld5u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=61122571]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TabContainer" type="TabContainer" parent="Panel/VBoxContainer" unique_id=1268311807]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Project" parent="Panel/VBoxContainer/TabContainer" unique_id=1631588843 instance=ExtResource("1_xequw")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Tools" parent="Panel/VBoxContainer/TabContainer" unique_id=1657501930 instance=ExtResource("2_0ld5u")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Timeline" parent="Panel/VBoxContainer/TabContainer" unique_id=154136105 instance=ExtResource("1_svsaf")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Sounds" parent="Panel/VBoxContainer/TabContainer" unique_id=937746610 instance=ExtResource("4_5xylh")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="CloseButton" type="Button" parent="Panel/VBoxContainer" unique_id=970103182]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="Panel/VBoxContainer/CloseButton" to="." method="close"]

@@ -1,6 +1,8 @@
 class_name Canvas
 extends Node2D
 
+signal canvas_input(event: InputEventMouse)
+
 var _project: Project
 
 @onready var control_node: Control = $Control
@@ -73,3 +75,6 @@ func bake_page() -> void:
 		node.queue_free()
 
 	_project.get_current_page()
+
+func _on_gui_input(event: InputEvent) -> void:
+	canvas_input.emit(event)

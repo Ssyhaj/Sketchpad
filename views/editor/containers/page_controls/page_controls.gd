@@ -1,9 +1,11 @@
+class_name PageControls
 extends Node
+
+signal menu_toggle
 
 signal play_toggle
 
-signal load_call
-signal save_call
+@export var menu_button: Button
 
 @export var next_page_button: Button
 @export var page_count_label: Label
@@ -13,9 +15,6 @@ signal save_call
 @export var framerate_label: Label
 
 @export var play_button: Button
-
-@export var save_button: Button
-@export var load_button: Button
 
 var is_playing = false
 
@@ -50,8 +49,5 @@ func _on_slider_value_changed(value: float) -> void:
 	framerate_label.text = str(int(value))
 	_project.framerate = value
 
-func _on_save_button_pressed() -> void:
-	save_call.emit()
-
-func _on_load_button_pressed() -> void:
-	load_call.emit()
+func _on_menu_button_pressed() -> void:
+	menu_toggle.emit()

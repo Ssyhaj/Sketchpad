@@ -1,13 +1,14 @@
 extends Node
 
+@export var canvas: Canvas
+@export var page_controls: PageControls
+@export var playback_manager: PlaybackManager
+@export var edit_extras: EditExtras
+
 var project: Project
 var current_page: Page
 
 var current_tool: Tool
-
-@onready var canvas = $CanvasContainer/CanvasViewport/Canvas
-@onready var page_controls = $PageControls
-@onready var playback_manager = $PlaybackManager
 
 func _ready() -> void:
 	project = Project.new()
@@ -15,7 +16,11 @@ func _ready() -> void:
 	page_controls.attach_project(project)
 	canvas.attach_project(project)
 	playback_manager.attach_project(project)
+	edit_extras.attach_project(project)
 
+	canvas.canvas_input.connect(_handle_canvas_input)
+
+	page_controls.menu_toggle.connect(edit_extras.open)
 	page_controls.play_toggle.connect(
 		func(): playback_manager.is_playing = !playback_manager.is_playing
 		)
@@ -24,7 +29,7 @@ func _ready() -> void:
 
 	current_tool = Brush.new() # Placeholder for now.
 
-func _input(event: InputEvent) -> void:
+func _handle_canvas_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		var canvas_pos = canvas.dynamic_node.get_local_mouse_position()
 		if event is InputEventMouseButton:
